@@ -12,7 +12,7 @@ document.getElementById('generateButton').addEventListener('click', async () => 
     responseTextDiv.innerText = ''; // Clear previous content
 
     try {
-        const response = await fetch(`/generate-content`, {
+        const response = await fetch(`/.netlify/functions/generate-content`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
