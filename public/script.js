@@ -12,10 +12,18 @@ document.getElementById('generateButton').addEventListener('click', async () => 
     responseTextDiv.innerText = ''; // Clear previous content
 
     try {
-        const response = await fetch(`/generate-content?prompt=${encodeURIComponent(prompt)}`);
+        const response = await fetch(`/generate-content`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ prompt })
+        });
+
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
         const data = await response.json();
         responseTextDiv.innerText = data.text;
     } catch (error) {

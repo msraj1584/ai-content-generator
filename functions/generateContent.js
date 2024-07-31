@@ -2,22 +2,30 @@ require('dotenv').config();
 const { GoogleGenerativeAI } = require("generative-ai");
 
 exports.handler = async (event, context) => {
-    const apiKey = process.env.API_KEY;
-    const prompt = event.queryStringParameters.prompt;
-
-    if (!prompt) {
+    // Ensure the request method is POST
+    if (event.httpMethod !== 'POST') {
         return {
-            statusCode: 400,
-            body: JSON.stringify({ error: "Prompt is required" }),
+            statusCode: 405,
+            body: JSON.stringify({ error: "Method Not Allowed" }),
         };
     }
 
-    const genAi = new GoogleGenerativeAI(apiKey);
-    const model = genAi.getGenerativeModel({
-        model: "gemini-1.5-pro"
-    });
-
     try {
+        const { prompt } = JSON.parse(event.body);
+        
+        if (!prompt) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ error: "Prompt is required" }),
+            };
+        }
+
+        const apiKey = process.env.API_KEY;
+        const genAi = new GoogleGenerativeAI(apiKey);
+        const model = genAi.getGenerativeModel({
+            model: "gemini-1.5-pro"
+        });
+
         const response = await model.generateContent(prompt);
         return {
             statusCode: 200,
