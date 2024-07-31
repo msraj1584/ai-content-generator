@@ -1,8 +1,7 @@
 require('dotenv').config();
 const { GoogleGenerativeAI } = require("generative-ai");
 
-exports.handler = async (event, context) => {
-    // Ensure the request method is POST
+exports.handler = async (event) => {
     if (event.httpMethod !== 'POST') {
         return {
             statusCode: 405,
