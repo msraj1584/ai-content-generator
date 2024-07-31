@@ -1,6 +1,8 @@
 [build]
   publish = "public"
-  functions = "netlify/functions"
+  functions = "functions"
+[dev]
+  functions = "functions"
 
 [[redirects]]
   from = "/generate-content"
