@@ -12,7 +12,7 @@ document.getElementById('generateButton').addEventListener('click', async () => 
     responseTextDiv.innerText = ''; // Clear previous content
 
     try {
-        const response = await fetch(`/generate-content?prompt=${encodeURIComponent(prompt)}`);
+        const response = await fetch(`/generateContent?prompt=${encodeURIComponent(prompt)}`);
         const data = await response.json();
         if (response.ok) {
             responseTextDiv.innerText = data.text;
