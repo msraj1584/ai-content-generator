@@ -1,0 +1,8 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/generate-content"
+  to = "/.netlify/functions/generateContent"
+  status = 200
