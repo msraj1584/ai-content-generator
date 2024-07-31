@@ -6,5 +6,5 @@
 
 [[redirects]]
   from = "/generate-content"
-  to = "/.netlify/functions/generateContent"
+  to = "/.netlify/functions/generate-content"
   status = 200
