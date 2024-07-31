@@ -12,14 +12,14 @@ document.getElementById('generateButton').addEventListener('click', async () => 
     responseTextDiv.innerText = ''; // Clear previous content
 
     try {
-        const response = await fetch(`/generateContent?prompt=${encodeURIComponent(prompt)}`);
-        const data = await response.json();
-        if (response.ok) {
-            responseTextDiv.innerText = data.text;
-        } else {
-            responseTextDiv.innerText = 'Error: ' + data.error;
+        const response = await fetch(`/generate-content?prompt=${encodeURIComponent(prompt)}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
+        const data = await response.json();
+        responseTextDiv.innerText = data.text;
     } catch (error) {
+        console.error('Fetch error:', error);
         responseTextDiv.innerText = 'Error: ' + error.message;
     } finally {
         loader.classList.add('hidden');
